@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة الأستاذ علي عبد الحسين عكله - الثالث متوسط</title>
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --bg-main: #0f172a;
+            --bg-card: rgba(30, 41, 59, 0.7);
+            --border: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        [data-theme="light"] {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-main: #f1f5f9;
+            --bg-card: rgba(255, 255, 255, 0.8);
+            --border: rgba(0, 0, 0, 0.1);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            transition: background-color 0.3s, color 0.3s, transform 0.2s, border-color 0.3s;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 25px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            background: var(--border);
+        }
+
+        main {
+            flex: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .welcome-screen {
+            text-align: center;
+            padding: 20px 10px;
+        }
+
+        .welcome-title {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #60a5fa, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .welcome-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto 40px auto;
+        }
+
+        .category-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px 20px;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(8px);
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        .category-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        .category-card p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .telegram-section {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+        }
+
+        .telegram-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #38bdf8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .telegram-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+        }
+
+        .telegram-item {
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            padding: 14px 18px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .telegram-item:hover {
+            border-color: #38bdf8;
+            background: rgba(56, 189, 248, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .section-view {
+            display: none;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .search-input, .select-input {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 10px 15px;
+            border-radius: 8px;
+            outline: none;
+            font-size: 0.95rem;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .item-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(8px);
+        }
+
+        .item-badge {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            width: fit-content;
+        }
+
+        .item-title {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .item-info {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        .btn-download {
+            flex: 1;
+            justify-content: center;
+        }
+
+        .btn-delete {
+            background: #ef4444;
+            color: white;
+            padding: 8px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 200;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            max-width: 500px;
+            width: 100%;
+            color: var(--text-main);
+            box-shadow: var(--shadow);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--bg-main);
+            color: var(--text-main);
+            outline: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">
+            <span class="brand-icon">🎓</span>
+            <h1>منصة الأستاذ علي عبد الحسين عكله</h1>
+        </div>
+        <div class="controls">
+            <button class="btn btn-outline" onclick="openModal()">➕ إضافة ملف</button>
+            <button class="btn btn-outline" onclick="toggleTheme()">🌓 المظهر</button>
+        </div>
+    </header>
+
+    <main>
+        <div id="welcomeScreen" class="welcome-screen">
+            <h2 class="welcome-title">مرحباً بك في منصة الثالث متوسط</h2>
+            <p class="welcome-subtitle">اختر القسم الذي تريد تصفحه للوصول المباشر إلى الملفات والتحميل</p>
+            
+            <div class="category-grid">
+                <div class="category-card" onclick="openSection('books')">
+                    <span class="category-icon">📚</span>
+                    <h3>قسم الكتب الدراسية</h3>
+                    <p>جميع المناهج والكتب المدرسية الرسمية لجميع المواد</p>
+                </div>
+                <div class="category-card" onclick="openSection('malazim')">
+                    <span class="category-icon">📝</span>
+                    <h3>قسم الملازم والملخصات</h3>
+                    <p>ملازم متميزة لمواد الفيزياء، الاجتماعيات، واللغة العربية</p>
+                </div>
+            </div>
+
+            <div class="telegram-section">
+                <h3>📢 قنوات المدرسين والأساتذة على التليجرام</h3>
+                <div class="telegram-grid">
+                    <a href="https://t.me/+M5W23DbIucI4ZTVi" target="_blank" class="telegram-item">
+                        <span>🧪 قناة الأحياء</span>
+                        <span>✈️</span>
+                    </a>
+                    <a href="https://t.me/abnalnaadem" target="_blank" class="telegram-item">
+                        <span>📖 قناة اللغة العربية</span>
+                        <span>✈️</span>
+                    </a>
+                    <a href="https://t.me/haderhakm9" target="_blank" class="telegram-item">
+                        <span>🌍 قناة الاجتماعيات</span>
+                        <span>✈️</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="sectionView" class="section-view">
+            <div class="section-header">
+                <div class="back-btn" onclick="showWelcome()">➡️ العودة للقائمة الرئيسية</div>
+                <h2 id="sectionTitle">قسم المحتوى</h2>
+            </div>
+
+            <div class="filter-bar">
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث عن كتاب أو ملزمة..." oninput="filterItems()">
+                <select id="subjectFilter" class="select-input" onchange="filterItems()">
+                    <option value="all">جميع المواد</option>
+                    <option value="math">الرياضيات</option>
+                    <option value="physics">الفيزياء</option>
+                    <option value="chemistry">الكيمياء</option>
+                    <option value="biology">الأحياء</option>
+                    <option value="arabic">اللغة العربية</option>
+                    <option value="english">اللغة الإنجليزية</option>
+                    <option value="islamic">التربية الإسلامية</option>
+                    <option value="social">الاجتماعيات</option>
+                </select>
+            </div>
+
+            <div id="contentGrid" class="content-grid"></div>
+        </div>
+    </main>
+
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>إضافة كتاب أو ملزمة جديد</h3>
+                <span style="cursor:pointer;" onclick="closeModal()">✖</span>
+            </div>
+            <form id="addForm" onsubmit="handleAddItem(event)">
+                <div class="form-group">
+                    <label>عنوان الكتاب / الملزمة</label>
+                    <input type="text" id="itemTitle" class="form-control" required placeholder="مثال: ملزمة الفيزياء المركزّة">
+                </div>
+                <div class="form-group">
+                    <label>نوع القسم</label>
+                    <select id="itemType" class="form-control" required>
+                        <option value="books">قسم الكتب الدراسية</option>
+                        <option value="malazim">قسم الملازم والملخصات</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>المادة</label>
+                    <select id="itemSubject" class="form-control" required>
+                        <option value="math">الرياضيات</option>
+                        <option value="physics">الفيزياء</option>
+                        <option value="chemistry">الكيمياء</option>
+                        <option value="biology">الأحياء</option>
+                        <option value="arabic">اللغة العربية</option>
+                        <option value="english">اللغة الإنجليزية</option>
+                        <option value="islamic">التربية الإسلامية</option>
+                        <option value="social">الاجتماعيات</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>اسم المدرس / المصدر</label>
+                    <input type="text" id="itemTeacher" class="form-control" placeholder="الأستاذ علي عبد الحسين عكله">
+                </div>
+                <div class="form-group">
+                    <label>رابط تنزيل الملف (PDF)</label>
+                    <input type="text" id="itemUrl" class="form-control" required placeholder="ضع رابط التنزيل هنا">
+                </div>
+                <div class="form-group">
+                    <label>الحجم التقديري (اختياري)</label>
+                    <input type="text" id="itemSize" class="form-control" placeholder="مثال: 12 MB">
+                </div>
+                <button type="submit" class="btn" style="width: 100%; justify-content: center; margin-top: 10px;">حفظ وإضافة للموقع</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>جميع الحقوق محفوظة © منصة الأستاذ علي عبد الحسين عكله - الصف الثالث متوسط</p>
+    </footer>
+
+    <script>
+        const initialData = [
+            // ==================== [ قسم الكتب الدراسية (جميع المواد) ] ====================
+            {
+                id: 1,
+                title: "كتاب الرياضيات - الجزء الأول والثاني",
+                subject: "math",
+                type: "books",
+                teacher: "وزارة التربية",
+                size: "15 MB",
+                fileUrl: "https://bk2.shr4.com/books/bb3/2025-2026/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB%20%D9%85%D8%AA%D9%88%D8%B3%D8%B7.pdf"
+            },
+            {
+                id: 2,
+                title: "كتاب الفيزياء - الصف الثالث متوسط",
+                subject: "physics",
+                type: "books",
+                teacher: "وزارة التربية",
+                size: "12 MB",
+                fileUrl: "https://bk2.shr4.com/books/bb3/2025-2026/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D9%81%D9%8A%D8%B2%D9%8A%D8%A7%D8%A1%20%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB%20%D9%85%D8%AA%D9%88%D8%B3%D8%B7.pdf"
+            },
+            {
+                id: 3,
+                title: "كتاب الكيمياء - الصف الثالث متوسط",
+                subject: "chemistry",
+                type: "books",
+                teacher: "وزارة التربية",
+                size: "10 MB",
+                fileUrl: "https://bk2.shr4.com/books/bb3/2025-2026/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D9%83%D9%8A%D9%85%D9%8A%D8%A7%D8%A1%20%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB%20%D9%85%D8%AA%D9%88%D8%B3%D8%B7.pdf"
+            },
+            {
+                id: 4,
+                title: "كتاب الأحياء (الإنسان والصحة)",
+                subject: "biology",
+                type: "books",
+                teacher: "وزارة التربية",
+                size: "14 MB",
+                fileUrl: "https://bk2.shr4.com/books/bb3/2025-2026/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D8%A7%D8%AD%D9%8A%D8%A7%D8%A1%20%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB%20%D9%85%D8%AA%D9%88%D8%B3%D8%B7.pdf"
+            },
+            {
+                id: 5,
+                title: "كتاب اللغة العربية - الجزء الأول والثاني",
+                subject: "arabic",
+                type: "books",
+                teacher: "وزارة التربية",
+                size: "18 MB",
+                fileUrl: "https://bk2.shr4.com/books/bb3/2025-2026/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%20%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB%20%D9%85%D8%AA%D9%88%D8%B3%D8%B7%20%D8%A7%D9%84%D8%AC%D8%B2%D8%A1%20%D8%A7%D9%84%D8%A7%D9%88%D9%84.pdf"
+            },
+            {
+                id: 6,
+                title: "كتاب اللغة الإنجليزية (Student's Book)",
+                subject: "english",
+                type: "books",
+                teacher: "وزارة التربية",
+                size: "16 MB",
+                fileUrl: "https://bk2.shr4.com/books/bb3/2023-2024/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D8%A7%D9%86%D9%83%D9%84%D9%8A%D8%B2%D9%8A%20(%D8%A7%D9%84%D8%B7%D8%A7%D9%84%D8%A8)%20%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB%20%D8%A7%D9%84%D9%85%D8%AA%D9%88%D8%B3%D8%B7.pdf"
+            },
+            {
+                id: 7,
+                title: "كتاب التربية الإسلامية",
+                subject: "islamic",
+                type: "books",
+                teacher: "وزارة التربية",
+                size: "9 MB",
+                fileUrl: "https://bk2.shr4.com/books/bb3/2025-2026/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D8%B3%D9%84%D8%A7%D9%85%D9%8A%D8%A9%20%D8%AB%D8%A7%D9%84%D8%AB%20%D9%85%D8%AA%D9%88%D8%B3%D8%B7.pdf"
+            },
+            {
+                id: 8,
+                title: "كتاب الاجتماعيات - الصف الثالث متوسط",
+                subject: "social",
+                type: "books",
+                teacher: "وزارة التربية",
+                size: "13 MB",
+                fileUrl: "https://bk2.shr4.com/books/bb3/2025-2026/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D8%A7%D8%AC%D8%AA%D9%85%D8%A7%D8%B9%D9%8A%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB%20%D9%85%D8%AA%D9%88%D8%B3%D8%B7.pdf"
+            },
+
+            // ==================== [ قسم الملازم (فيزياء، اجتماعيات، وعربي فقط) ] ====================
+            {
+                id: 9,
+                title: "ملزمة الفيزياء المركزّة",
+                subject: "physics",
+                type: "malazim",
+                teacher: "الأستاذ علي عبد الحسين عكله",
+                size: "7 MB",
+                fileUrl: "file:///C:/Users/ali%20abd%20Hussein/Downloads/Telegram%20Desktop/%D9%85%D9%84%D8%B2%D9%85%D8%A9%20%D8%A7%D9%84%D9%81%D9%8A%D8%B2%D9%8A%D8%A7%D8%A1-1.pdf"
+            },
+            {
+                id: 10,
+                title: "ملزمة قواعد ورسوم اللغة العربية",
+                subject: "arabic",
+                type: "malazim",
+                teacher: "الأستاذ علي عبد الحسين عكله",
+                size: "10 MB",
+                fileUrl: "file:///C:/Users/ali%20abd%20Hussein/Downloads/Telegram%20Desktop/%D9%85%D9%84%D8%B2%D9%85%D8%A9%20%D8%B9%D8%B1%D8%A8%D9%8A%20%D8%AB%D8%A7%D9%84%D8%AB%20%D9%85%D8%AA%D9%88%D8%B3%D8%B7.pdf"
+            },
+            {
+                id: 11,
+                title: "ملزمة الاجتماعيات (التاريخ والجغرافيا والوطنية)",
+                subject: "social",
+                type: "malazim",
+                teacher: "الأستاذ علي عبد الحسين عكله",
+                size: "11 MB",
+                fileUrl: "file:///C:/Users/ali%20abd%20Hussein/Downloads/Telegram%20Desktop/%D8%A7%D8%AC%D8%AA%D9%85%D8%A7%D8%B9%D9%8A%D8%A7%D8%AA%20%20%D8%AB%D8%A7%D9%84%D8%AB%20%D9%85%D8%AA%D9%88%D8%B3%D8%B71.pdf"
+            }
+        ];
+
+        let currentSection = '';
+        let itemsData = JSON.parse(localStorage.getItem('ali_platform_data')) || initialData;
+
+        function saveData() {
+            localStorage.setItem('ali_platform_data', JSON.stringify(itemsData));
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.body.getAttribute('data-theme');
+            if (currentTheme === 'light') {
+                document.body.removeAttribute('data-theme');
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+            }
+        }
+
+        function openSection(type) {
+            currentSection = type;
+            document.getElementById('welcomeScreen').style.display = 'none';
+            document.getElementById('sectionView').style.display = 'block';
+            document.getElementById('sectionTitle').innerText = type === 'books' ? '📚 قسم الكتب الدراسية' : '📝 قسم الملازم والملخصات';
+            filterItems();
+        }
+
+        function showWelcome() {
+            document.getElementById('welcomeScreen').style.display = 'block';
+            document.getElementById('sectionView').style.display = 'none';
+        }
+
+        function getSubjectName(subjectKey) {
+            const map = {
+                math: 'الرياضيات',
+                physics: 'الفيزياء',
+                chemistry: 'الكيمياء',
+                biology: 'الأحياء',
+                arabic: 'اللغة العربية',
+                english: 'اللغة الإنجليزية',
+                islamic: 'التربية الإسلامية',
+                social: 'الاجتماعيات'
+            };
+            return map[subjectKey] || subjectKey;
+        }
+
+        function renderItems(list) {
+            const grid = document.getElementById('contentGrid');
+            grid.innerHTML = '';
+
+            if (list.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">لا توجد عناصر مضافة في هذا القسم حالياً.</p>';
+                return;
+            }
+
+            list.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'item-card';
+                card.innerHTML = `
+                    <div>
+                        <span class="item-badge">${getSubjectName(item.subject)}</span>
+                        <h4 class="item-title">${item.title}</h4>
+                        <div class="item-info">
+                            <div>إعداد: ${item.teacher || 'الأستاذ علي عبد الحسين'}</div>
+                            <div>الحجم: ${item.size || 'غير محدد'}</div>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <a href="${item.fileUrl}" target="_blank" download class="btn btn-download">📥 تحميل PDF</a>
+                        <button class="btn-delete" onclick="deleteItem(${item.id})">🗑️</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterItems() {
+            const searchVal = document.getElementById('searchInput').value.toLowerCase();
+            const subjectVal = document.getElementById('subjectFilter').value;
+
+            const filtered = itemsData.filter(item => {
+                const matchesSection = item.type === currentSection;
+                const matchesSearch = item.title.toLowerCase().includes(searchVal);
+                const matchesSubject = subjectVal === 'all' || item.subject === subjectVal;
+                return matchesSection && matchesSearch && matchesSubject;
+            });
+
+            renderItems(filtered);
+        }
+
+        function openModal() {
+            document.getElementById('addModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('addModal').style.display = 'none';
+        }
+
+        function handleAddItem(e) {
+            e.preventDefault();
+            const newItem = {
+                id: Date.now(),
+                title: document.getElementById('itemTitle').value,
+                type: document.getElementById('itemType').value,
+                subject: document.getElementById('itemSubject').value,
+                teacher: document.getElementById('itemTeacher').value || 'الأستاذ علي عبد الحسين عكله',
+                fileUrl: document.getElementById('itemUrl').value,
+                size: document.getElementById('itemSize').value || 'PDF'
+            };
+
+            itemsData.push(newItem);
+            saveData();
+            closeModal();
+            document.getElementById('addForm').reset();
+            
+            if (currentSection) {
+                filterItems();
+            } else {
+                openSection(newItem.type);
+            }
+        }
+
+        function deleteItem(id) {
+            if (confirm('هل أنت تأكد من إزالة هذا الملف؟')) {
+                itemsData = itemsData.filter(i => i.id !== id);
+                saveData();
+                filterItems();
+            }
+        }
+    </script>
+</body>
+</html>
